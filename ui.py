@@ -8,8 +8,6 @@ from speech import SpeechService
 
 
 class TranslatorWindow(QMainWindow):
-    """Main window for the desktop translation tool."""
-
     MAX_INPUT_CHARS = 2000
 
     def __init__(self):
