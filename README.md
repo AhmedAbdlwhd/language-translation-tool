@@ -111,4 +111,4 @@ The UI never talks to an API directly — it calls service classes, so providers
 
 ---
 
-Built as part of the **CodeAlpha** AI internship. Licensed under the [MIT License](LICENSE).
+Licensed under the [MIT License](LICENSE).
