@@ -100,6 +100,18 @@ class TranslatorService:
             response.raise_for_status()
             data = response.json()
             translated_text = data["responseData"]["translatedText"]
+
+            # MyMemory is crowd-sourced; its top match is occasionally empty.
+            # Fall back to the best non-empty alternative match.
+            if not translated_text.strip():
+                translated_text = next(
+                    (m["translation"] for m in data.get("matches", [])
+                     if m.get("translation", "").strip()),
+                    "",
+                )
+            if not translated_text.strip():
+                raise ValueError("Translation service returned an empty result.")
+
             return unescape(translated_text)
         except requests.RequestException as error:
             raise ValueError(f"Translation request failed: {error}")
